@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "composite": true,
+    "isolatedModules": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "removeComments": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "outDir": "build",
+    "noImplicitAny": true,
+    "sourceMap": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
