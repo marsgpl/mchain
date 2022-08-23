@@ -6,3 +6,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+:root {
+    --header-z-index: 1000;
+    --header-height: 52px;
+    --light-gray: #f4f4f4;
+}
