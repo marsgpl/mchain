@@ -2,7 +2,7 @@
   "name": "Memory Chain",
   "short_name": "MChain",
   "description": "Standalone password manager",
-  "background_color": "#ffffff",
+  "background_color": "#fafafa",
   "theme_color": "#46c37b",
   "display": "standalone",
   "orientation": "portrait",

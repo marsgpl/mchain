@@ -1,0 +1,58 @@
+.Root {
+    display: block;
+    position: relative;
+    width: 100%;
+    min-width: calc(var(--input-h) * 2);
+}
+
+.Icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--input-h);
+    height: var(--input-h);
+    padding: 17px;
+    cursor: pointer;
+}
+
+.LeftIcon {
+    left: 0;
+}
+
+.RightIcon {
+    right: 0;
+}
+
+.Input {
+    display: block;
+    background: #fff;
+    color: #000;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+    border: none;
+    padding: 15px 13px;
+    outline: none;
+    appearance: none;
+    cursor: text;
+    user-select: text;
+    width: 100%;
+    height: var(--input-h);
+    font-size: 16px;
+}
+
+.Input:focus {
+    box-shadow: 0 2px 0 var(--primary-color);
+}
+
+.Input[disabled] {
+    cursor: default;
+    opacity: .7;
+    box-shadow: none;
+}
+
+.Root.WithLeftIcon .Input {
+    padding-left: var(--input-h);
+}
+
+.Root.WithRightIcon .Input {
+    padding-right: var(--input-h);
+}

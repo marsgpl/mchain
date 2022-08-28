@@ -3,7 +3,37 @@
     left: 0;
     right: 0;
     top: 0;
-    z-index: var(--header-z-index);
-    height: var(--header-height);
-    background: var(--light-gray);
+    z-index: var(--hdr-z);
+    height: var(--hdr-h);
+    background: #f4f4f4;
+}
+
+.Line {
+    height: var(--hdr-h);
+    max-width: var(--max-w);
+    margin: 0 auto;
+    background: #eee;
+    display: flex;
+}
+
+.LineTitle {
+    font-weight: 600;
+    line-height: var(--hdr-h);
+    text-align: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 0 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #000;
+    font-size: 16px;
+}
+
+.LineAction {
+    width: var(--hdr-h);
+    height: var(--hdr-h);
+    flex-shrink: 0;
+    cursor: pointer;
+    padding: 17px;
 }

@@ -1,0 +1,43 @@
+.Root {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.Root::before {
+    content: '';
+    position: absolute;
+    left: calc(50% - 50px);
+    bottom: calc(50% + var(--input-h));
+    width: 100px;
+    height: 100px;
+    background: url(img/icon/logo.svg) no-repeat center / cover;
+}
+
+.InputRow {
+    flex-shrink: 0;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+    border-radius: 3px 3px 0 0;
+}
+
+.Input {
+    border-radius: 3px 3px 0 0;
+}
+
+@media (max-height: 359px) {
+    .Root::before {
+        display: none;
+    }
+}
+
+@media (max-width: 199px) {
+    .Root::before {
+        display: none;
+    }
+}
