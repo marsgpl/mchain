@@ -1,0 +1,21 @@
+.Root {
+    max-width: var(--content-max-width);
+    padding: calc(var(--page-padding) * .5);
+    background: #efefef;
+    min-height: 100%;
+    margin: 0 auto;
+}
+
+.Row + .Row {
+    margin-top: 10px;
+}
+
+.Submit {
+    margin-top: 20px;
+}
+
+@media (min-width: 600px) {
+    .Root {
+        padding: 20px;
+    }
+}

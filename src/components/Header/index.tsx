@@ -1,67 +1,111 @@
 import React from 'react'
-import { Icon } from 'components/Icon'
-import { InputLine } from 'components/InputLine'
-
+import { Icon, IconId } from 'components/Icon'
+import { InputText } from 'components/InputText'
+import { Route } from 'defs/routes'
+import { cn } from 'lib/cn'
+import { useNavigate } from 'react-router-dom'
 import s from './index.module.css'
+import { KEY_ESCAPE } from 'defs/keys'
+
+export const HEADER_ACTION_SEARCH = '^s'
 
 export interface HeaderProps {
-    title: string
+    title?: string
+    leftIcon?: IconId
+    rightIcon?: IconId
+    leftAction?: React.MouseEventHandler | Route | typeof HEADER_ACTION_SEARCH
+    rightAction?: React.MouseEventHandler | Route | typeof HEADER_ACTION_SEARCH
+    onSearch?: React.Dispatch<React.SetStateAction<string>>
 }
 
-interface SearchManipulation {
-    setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>
-}
+type Action = HeaderProps['leftAction'] | HeaderProps['rightAction']
 
-type DefaultProps = SearchManipulation & Pick<HeaderProps, 'title'>
-type SearchProps = SearchManipulation
+export function Header({
+    title,
+    leftIcon,
+    rightIcon,
+    leftAction,
+    rightAction,
+    onSearch,
+}: HeaderProps) {
+    const navigate = useNavigate()
 
-function renderDefault({ title, setIsSearchActive }: DefaultProps) {
-    return (
+    const [searching, setSearching] = React.useState(false)
+
+    const getAction = React.useCallback((action: Action) => {
+        if (action === HEADER_ACTION_SEARCH) {
+            return () => setSearching(true)
+        }
+
+        if (typeof action === 'string') {
+            return () => navigate(action)
+        }
+
+        if (typeof action === 'function') {
+            return action
+        }
+    }, [])
+
+    const onChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+        onSearch?.(event.target.value)
+    }
+
+    const killSearch = () => {
+        setSearching(false)
+        onSearch?.('')
+    }
+
+    const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = event => {
+        if (event.key === KEY_ESCAPE) {
+            killSearch()
+        }
+    }
+
+    const renderSearch = () => (
         <div className={s.Line}>
-            <div className={s.LineAction}>
-                <Icon id="Menu" />
-            </div>
-            <div className={s.LineTitle}>
-                {title}
-            </div>
-            <div className={s.LineAction} onClick={() => setIsSearchActive(true)}>
-                <Icon id="Search" />
-            </div>
-        </div>
-    )
-}
-
-function renderSearch({ setIsSearchActive }: SearchProps) {
-    return (
-        <div className={s.Line}>
-            <InputLine
-                leftIcon="Search"
-                rightIcon="Close"
-                onRightIconClick={() => setIsSearchActive(false)}
-                inputHtmlProps={{
+            <InputText
+                leftIcon="search"
+                rightIcon="close"
+                rightAction={killSearch}
+                inputAttrs={{
                     placeholder: 'Search',
                     type: 'text',
                     autoCorrect: 'off',
                     autoComplete: 'off',
                     spellCheck: false,
                     autoFocus: true,
+                    onKeyDown,
+                    onChange,
                 }}
             />
         </div>
     )
-}
 
-export function Header({ title }: HeaderProps) {
-    const [isSearchActive, setIsSearchActive] = React.useState(false)
+    const renderLine = () => (
+        <div className={s.Line}>
+            <div
+                className={cn(s.Icon, leftAction && s.IconClickable)}
+                onClick={getAction(leftAction)}
+            >
+                {leftIcon ? <Icon id={leftIcon} /> : null}
+            </div>
+
+            <div className={s.LineTitle}>
+                {title || ''}
+            </div>
+
+            <div
+                className={cn(s.Icon, rightAction && s.IconClickable)}
+                onClick={getAction(rightAction)}
+            >
+                {rightIcon ? <Icon id={rightIcon} /> : null}
+            </div>
+        </div>
+    )
 
     return (
         <div className={s.Root}>
-            {isSearchActive ? renderSearch({
-                setIsSearchActive,
-            }) : renderDefault({
-                title,
-                setIsSearchActive,
-            })}
+            {searching ? renderSearch() : renderLine()}
         </div>
     )
 }

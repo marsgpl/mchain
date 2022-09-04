@@ -1,39 +1,41 @@
 .Root {
     position: fixed;
+    top: 0;
     left: 0;
     right: 0;
-    top: 0;
-    z-index: var(--hdr-z);
-    height: var(--hdr-h);
-    background: #f4f4f4;
+    z-index: var(--header-z);
+    height: var(--header-height);
+    background: #eee;
 }
 
 .Line {
-    height: var(--hdr-h);
-    max-width: var(--max-w);
     margin: 0 auto;
-    background: #eee;
+    max-width: var(--content-max-width);
+    height: 100%;
+    background: #e5e5e5;
     display: flex;
 }
 
 .LineTitle {
-    font-weight: 600;
-    line-height: var(--hdr-h);
+    font-weight: 500;
+    line-height: var(--header-height);
     text-align: center;
-    flex-grow: 1;
-    flex-shrink: 1;
-    padding: 0 10px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    color: #000;
-    font-size: 16px;
+    flex-grow: 1;
 }
 
-.LineAction {
-    width: var(--hdr-h);
-    height: var(--hdr-h);
+.Icon {
+    width: var(--header-height);
+    height: 100%;
     flex-shrink: 0;
-    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 17px;
+}
+
+.IconClickable {
+    cursor: pointer;
 }

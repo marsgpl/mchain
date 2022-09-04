@@ -1,0 +1,43 @@
+.Root {
+    position: relative;
+    padding: 10px var(--input-height) 10px 20px;
+    background: #fff;
+    margin-top: 4px;
+    border-radius: var(--input-border-radius);
+}
+
+.Row {
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.RowBold {
+    font-weight: 500;
+}
+
+.RowClickable {
+    cursor: pointer;
+    color: #666;
+}
+
+.RowClickable:hover {
+    color: #000;
+}
+
+.More {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--input-height);
+    height: var(--input-height);
+    padding: 17px;
+    opacity: .4;
+    cursor: pointer;
+}
+
+.More:hover {
+    opacity: 1;
+}

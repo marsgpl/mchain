@@ -1,0 +1,5 @@
+.Root {
+    padding-bottom: 50px;
+    margin: 0 auto;
+    max-width: var(--content-max-width);
+}

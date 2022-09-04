@@ -4,9 +4,17 @@
     height: 100%;
 }
 
-.Menu { background-image: url('img/icon/menu.svg'); }
-.Search { background-image: url('img/icon/search.svg'); width: 80%; height: 80%; margin: 10%; }
-.Close { background-image: url('img/icon/close.svg'); }
-.Lock { background-image: url('img/icon/lock.svg'); }
-.Left { background-image: url('img/icon/left.svg'); width: 90%; height: 90%; margin: 5%; }
-.Right { background-image: url('img/icon/left.svg'); width: 90%; height: 90%; margin: 5%; transform: scaleX(-1); }
+.close { background-image: url('./img/close.svg'); }
+.copy { background-image: url('./img/copy.svg'); }
+.delete { background-image: url('./img/delete.svg'); }
+.edit { background-image: url('./img/edit.svg'); }
+.left { background-image: url('./img/left.svg'); background-size: 80%; }
+.right { background-image: url('./img/left.svg'); background-size: 80%; transform: scaleX(-1); }
+.lock { background-image: url('./img/lock.svg'); }
+.logo { background-image: url('./img/logo.svg'); }
+.menu { background-image: url('./img/menu.svg'); }
+.more { background-image: url('./img/more.svg'); background-size: 80%; }
+.plus { background-image: url('./img/plus.svg'); }
+.search { background-image: url('./img/search.svg'); background-size: 80%; }
+.star { background-image: url('./img/star.svg'); }
+.wand { background-image: url('./img/wand.svg'); }
