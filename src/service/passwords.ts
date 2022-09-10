@@ -61,9 +61,13 @@ export function getPasswordsIv(): PasswordIV {
     } else {
         const iv = CryptoJS.lib.WordArray.random(AES_IV_BYTES)
         const hex = CryptoJS.enc.Hex.stringify(iv)
-        localStorage.setItem(LOCAL_STORAGE_PASSWORDS_IV, hex)
+        savePasswordsIv(hex)
         return iv
     }
+}
+
+export function savePasswordsIv(hexIv: string) {
+    localStorage.setItem(LOCAL_STORAGE_PASSWORDS_IV, hexIv)
 }
 
 export function erasePasswords() {

@@ -23,8 +23,55 @@ export function RequestKeyPage({ onSubmit }: RequestKeyPageProps) {
         setKey(event.target.value)
     }
 
-    const importAll = () => {
-        alert('Not implemented')
+    const importFromFile = () => {
+        const input = document.createElement('input')
+
+        input.type = 'file'
+
+        input.addEventListener('change', () => {
+            const file = input.files?.[0]
+            if (!file) { return }
+
+            if (!window.confirm('This will overwrite all current data.\nContinue?')) { return false }
+
+            const reader = new FileReader
+
+            reader.onerror = () => {
+                setToast({ message: 'Error reading file' })
+            }
+
+            reader.onload = () => {
+                try {
+                    const kv = JSON.parse(String(reader.result))
+                    if (typeof kv !== 'object') throw Error('not an object')
+                    Object.entries(kv).forEach(([k, v]) => {
+                        localStorage.setItem(k, String(v))
+                    })
+                    setToast({ message: 'Imported successfully' })
+                } catch {
+                    setToast({ message: 'Error parsing file' })
+                }
+            }
+
+            reader.readAsText(file, 'UTF-8')
+        })
+
+        input.click()
+    }
+
+    const importText = () => {
+        const text = window.prompt('Paste backup here')
+
+        try {
+            const kv = JSON.parse(String(text || ''))
+            if (typeof kv !== 'object') throw Error('not an object')
+            Object.entries(kv).forEach(([k, v]) => {
+                localStorage.setItem(k, String(v))
+            })
+            setToast({ message: 'Imported successfully' })
+        } catch {
+            setToast({ message: 'Error parsing text' })
+        }
     }
 
     const exportAll = () => {
@@ -57,12 +104,16 @@ export function RequestKeyPage({ onSubmit }: RequestKeyPageProps) {
         setActionMenu({
             buttons: [
                 {
-                    text: 'Import',
-                    onClick: importAll,
-                },
-                {
                     text: 'Export all',
                     onClick: exportAll,
+                },
+                {
+                    text: 'Import file',
+                    onClick: importFromFile,
+                },
+                {
+                    text: 'Import text',
+                    onClick: importText,
                 },
                 {
                     text: 'Erase all',
