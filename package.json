@@ -1,7 +1,7 @@
 {
   "name": "@marsgpl/mchain",
   "description": "Standalone password manager",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "homepage": "./",
   "dependencies": {
