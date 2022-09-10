@@ -18,3 +18,5 @@ Standalone password manager
   - api example - docker,mongo,routes - cloud upload
 - add verbose description + feature list
 - settings page (how to open it?)
+- way to clean key (logout)
+- export/import/erase options accessible from passwords page
