@@ -26,11 +26,11 @@
     width: 100%;
 }
 
-.ColorPrimary {
-    background: #41b572;
-    color: #fff;
-}
+.BgPrimary { background: var(--color-primary); color: #fff; }
+.BgPrimary:hover { background: #38a264; }
 
-.ColorPrimary:hover {
-    background-color: #38a264;
-}
+.BgWhite { background: #fff; color: #000; }
+.BgWhite:hover { background: #eee; }
+
+.BgTrans { background: rgba(0, 0, 0, 0); color: #000; }
+.BgTrans:hover { background: rgba(0, 0, 0, .05); }

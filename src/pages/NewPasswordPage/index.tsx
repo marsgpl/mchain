@@ -6,10 +6,10 @@ import { Password } from 'model/Password'
 import s from './index.module.css'
 
 export interface NewPasswordPageProps {
-    onCreate: (password: Password) => void
+    createPassword: (password: Password) => void
 }
 
-export function NewPasswordPage({ onCreate }: NewPasswordPageProps) {
+export function NewPasswordPage({ createPassword }: NewPasswordPageProps) {
     const navigate = useNavigate()
 
     return (
@@ -23,8 +23,11 @@ export function NewPasswordPage({ onCreate }: NewPasswordPageProps) {
             <PasswordForm
                 className={s.Form}
                 onSubmit={password => {
-                    onCreate(password)
+                    createPassword(password)
                     navigate(ROUTE_PASSWORDS)
+                }}
+                submitProps={{
+                    text: 'Create',
                 }}
             />
         </div>

@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js'
 import { newId } from 'lib/newId'
 import { NewPasswordProps, Password, Passwords } from 'model/Password'
-import { LOCAL_STORAGE_PASSWORDS_IV, LOCAL_STORAGE_PASSWORDS_KEY } from 'defs/localStorage'
+import { LOCAL_STORAGE_PASSWORDS_IV, LOCAL_STORAGE_PASSWORDS } from 'defs/localStorage'
 
 const AES_IV_BYTES = 16
 
@@ -10,11 +10,12 @@ export type PasswordIV = CryptoJS.lib.WordArray
 export function newPassword(props?: NewPasswordProps): Password {
     return {
         id: props?.id || newId(),
+        title: '',
     }
 }
 
 export function loadPasswords(key: string, iv: PasswordIV): Passwords {
-    const encrypted = localStorage.getItem(LOCAL_STORAGE_PASSWORDS_KEY)
+    const encrypted = readPasswords()
 
     if (encrypted === null) {
         return []
@@ -35,7 +36,7 @@ export function savePasswords(passwords: Passwords, key: string, iv: PasswordIV)
     const message = JSON.stringify(passwords)
     const encrypted = CryptoJS.AES.encrypt(message, key, { iv }).toString()
 
-    localStorage.setItem(LOCAL_STORAGE_PASSWORDS_KEY, encrypted)
+    localStorage.setItem(LOCAL_STORAGE_PASSWORDS, encrypted)
 }
 
 export function passwordToSearchChunk({
@@ -53,7 +54,7 @@ export function searchQueryToChunks(searchQuery: string): string[] {
 }
 
 export function getPasswordsIv(): PasswordIV {
-    const hex = localStorage.getItem(LOCAL_STORAGE_PASSWORDS_IV)
+    const hex = readPasswordsIv()
 
     if (hex) {
         return CryptoJS.enc.Hex.parse(hex)
@@ -63,4 +64,20 @@ export function getPasswordsIv(): PasswordIV {
         localStorage.setItem(LOCAL_STORAGE_PASSWORDS_IV, hex)
         return iv
     }
+}
+
+export function erasePasswords() {
+    localStorage.removeItem(LOCAL_STORAGE_PASSWORDS)
+}
+
+export function erasePasswordsIv() {
+    localStorage.removeItem(LOCAL_STORAGE_PASSWORDS_IV)
+}
+
+export function readPasswords() {
+    return localStorage.getItem(LOCAL_STORAGE_PASSWORDS)
+}
+
+export function readPasswordsIv() {
+    return localStorage.getItem(LOCAL_STORAGE_PASSWORDS_IV)
 }

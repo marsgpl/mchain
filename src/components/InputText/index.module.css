@@ -13,10 +13,15 @@
     bottom: 0;
     width: var(--input-height);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 17px;
+}
+
+.Icon:active {
+    opacity: .6;
 }
 
 .IconLeft {

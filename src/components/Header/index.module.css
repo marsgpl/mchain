@@ -38,4 +38,9 @@
 
 .IconClickable {
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.IconClickable:active {
+    opacity: .5;
 }

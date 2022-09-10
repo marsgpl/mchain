@@ -8,6 +8,14 @@
     padding: var(--page-padding);
 }
 
-.Button {
+.Message {
+    font-weight: 500;
+}
+
+.Buttons {
     margin-top: 20px;
+}
+
+.Button + .Button {
+    margin-left: 10px;
 }

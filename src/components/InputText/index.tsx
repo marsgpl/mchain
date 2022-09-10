@@ -14,6 +14,7 @@ export interface InputTextProps {
     rightAction?: React.MouseEventHandler | Route
     rightAction2?: React.MouseEventHandler | Route
     inputAttrs?: React.InputHTMLAttributes<HTMLInputElement>
+    inputRef?: React.RefObject<HTMLInputElement>
 }
 
 type Action = InputTextProps['leftAction'] | InputTextProps['rightAction']
@@ -27,12 +28,19 @@ export function InputText({
     rightAction,
     rightAction2,
     inputAttrs,
+    inputRef,
 }: InputTextProps) {
     const [value, setValue] = React.useState('')
 
     const navigate = useNavigate()
 
     const placeholder = inputAttrs?.placeholder
+
+    React.useEffect(() => {
+        if (inputAttrs?.value !== undefined) {
+            setValue(String(inputAttrs.value))
+        }
+    }, [inputAttrs?.value])
 
     const getAction = React.useCallback((action: Action) => {
         if (typeof action === 'string') {
@@ -42,7 +50,7 @@ export function InputText({
         if (typeof action === 'function') {
             return action
         }
-    }, [])
+    }, [navigate])
 
     return (
         <label className={cn(
@@ -64,6 +72,8 @@ export function InputText({
 
             <input
                 {...inputAttrs}
+                value={value}
+                ref={inputRef}
                 onChange={event => {
                     inputAttrs?.onChange?.(event)
                     setValue(event.target.value)

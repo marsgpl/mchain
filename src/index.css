@@ -38,7 +38,9 @@ body,
     --content-max-width: 600px;
     --input-height: 52px;
     --header-height: 52px;
+    --toast-height: 52px;
     --input-font-size: 16px;
     --input-border-radius: 3px;
     --header-z: 1000;
+    --action-menu-z: 10000;
 }

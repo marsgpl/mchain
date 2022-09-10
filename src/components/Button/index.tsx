@@ -2,20 +2,23 @@ import React from 'react'
 import { cn } from 'lib/cn'
 import s from './index.module.css'
 
-export type ButtonColor = 'primary'
+export type ButtonBg = 'primary' | 'white' | 'trans'
 
 export interface ButtonProps {
     text?: string
     type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type']
     onClick?: React.MouseEventHandler<HTMLButtonElement>
     className?: string
-    color?: ButtonColor
+    bg?: ButtonBg
+    textColor?: string
     wide?: boolean
 }
 
-function getColorClass(color?: ButtonColor): string {
-    switch (color) {
-        default: return s.ColorPrimary
+function getBgClass(bg?: ButtonBg): string {
+    switch (bg) {
+        case 'white': return s.BgWhite
+        case 'trans': return s.BgTrans
+        default: return s.BgPrimary
     }
 }
 
@@ -24,7 +27,8 @@ export function Button({
     type,
     onClick,
     className,
-    color,
+    bg,
+    textColor,
     wide,
 }: ButtonProps) {
     return (
@@ -34,9 +38,12 @@ export function Button({
             className={cn(
                 s.Root,
                 wide && s.Wide,
-                getColorClass(color),
+                getBgClass(bg),
                 className,
             )}
+            style={{
+                color: textColor,
+            }}
         >
             {text || ''}
         </button>

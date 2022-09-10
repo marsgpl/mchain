@@ -1,6 +1,6 @@
 export interface Password {
     id: string
-    title?: string
+    title: string
     username?: string
     password?: string
 }

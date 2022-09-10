@@ -21,6 +21,12 @@ export class ErrorBoundary extends React.Component<Props, State> {
         return { error }
     }
 
+    resetError = () => {
+        this.setState({
+            error: undefined
+        })
+    }
+
     render() {
         const { error } = this.state
 
@@ -29,7 +35,10 @@ export class ErrorBoundary extends React.Component<Props, State> {
         }
 
         return (
-            <ErrorPage message={stringifyError(error)} refreshable />
+            <ErrorPage
+                message={stringifyError(error)}
+                resetError={this.resetError}
+            />
         )
     }
 }

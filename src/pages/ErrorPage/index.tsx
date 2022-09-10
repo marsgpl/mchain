@@ -1,28 +1,48 @@
 import { Button } from 'components/Button'
 import { DEFAULT_ERROR_MESSAGE } from 'defs/errors'
+import { ROUTE_INDEX } from 'defs/routes'
+import { useNavigate } from 'react-router-dom'
 import s from './index.module.css'
 
 export interface ErrorPageProps {
     message?: string
-    refreshable?: boolean
+    resetError?: () => void
 }
 
 function refresh() {
     window.location.reload()
 }
 
-export function ErrorPage({ message, refreshable }: ErrorPageProps) {
+export function ErrorPage({
+    message,
+    resetError,
+}: ErrorPageProps) {
+    const navigate = useNavigate()
+
     return (
         <div className={s.Root}>
-            {message || DEFAULT_ERROR_MESSAGE}
+            <div className={s.Message}>
+                {message || DEFAULT_ERROR_MESSAGE}
+            </div>
 
-            {refreshable ? (
+            <div className={s.Buttons}>
                 <Button
-                    text="Refresh"
-                    onClick={refresh}
                     className={s.Button}
+                    text="Refresh"
+                    bg="white"
+                    onClick={refresh}
                 />
-            ) : null}
+
+                <Button
+                    className={s.Button}
+                    text="Go to root"
+                    bg="white"
+                    onClick={() => {
+                        resetError?.()
+                        navigate(ROUTE_INDEX)
+                    }}
+                />
+            </div>
         </div>
     )
 }

@@ -8,9 +8,10 @@ import s from './index.module.css'
 
 export interface PasswordsPageProps {
     passwords: Passwords
+    deletePassword: (passwordId: string) => boolean
 }
 
-export function PasswordsPage({ passwords }: PasswordsPageProps) {
+export function PasswordsPage({ passwords, deletePassword }: PasswordsPageProps) {
     const [searchQuery, setSearchQuery] = React.useState('')
 
     const searchInChunks = React.useMemo(() =>
@@ -28,11 +29,12 @@ export function PasswordsPage({ passwords }: PasswordsPageProps) {
             for (let i = 0; i < searchForChunks.length; ++i) {
                 const searchFor = searchForChunks[i]
 
-                if (searchIn.includes(searchFor)) {
-                    acc.push(passwords[index])
-                    break
+                if (!searchIn.includes(searchFor)) {
+                    return acc
                 }
             }
+
+            acc.push(passwords[index])
 
             return acc
         }, [])
@@ -60,6 +62,7 @@ export function PasswordsPage({ passwords }: PasswordsPageProps) {
                 <PasswordList
                     rowsN={filtered.length}
                     rowGetter={index => filtered[index]}
+                    deletePassword={deletePassword}
                 />
             ) : (
                 <div className={s.Empty}>

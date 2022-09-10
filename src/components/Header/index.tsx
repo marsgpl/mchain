@@ -44,7 +44,7 @@ export function Header({
         if (typeof action === 'function') {
             return action
         }
-    }, [])
+    }, [navigate])
 
     const onChange: React.ChangeEventHandler<HTMLInputElement> = event => {
         onSearch?.(event.target.value)

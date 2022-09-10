@@ -1,10 +1,12 @@
 import React from 'react'
 import { APP_TITLE } from 'defs/app'
 import { Button } from 'components/Button'
-import { KEY_ENTER } from 'defs/keys'
 import { InputText } from 'components/InputText'
-import s from './index.module.css'
 import { Icon } from 'components/Icon'
+import { useActionMenu } from 'hooks/useActionMenu'
+import { erasePasswords, erasePasswordsIv } from 'service/passwords'
+import { useToast } from 'hooks/useToast'
+import s from './index.module.css'
 
 export interface RequestKeyPageProps {
     onSubmit: (key: string) => void
@@ -12,6 +14,8 @@ export interface RequestKeyPageProps {
 
 export function RequestKeyPage({ onSubmit }: RequestKeyPageProps) {
     const [key, setKey] = React.useState('')
+    const setActionMenu = useActionMenu()
+    const setToast = useToast()
 
     const submit = () => onSubmit(key)
 
@@ -19,10 +23,54 @@ export function RequestKeyPage({ onSubmit }: RequestKeyPageProps) {
         setKey(event.target.value)
     }
 
-    const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = event => {
-        if (event.key === KEY_ENTER) {
-            submit()
-        }
+    const importAll = () => {
+        alert('Not implemented')
+    }
+
+    const exportAll = () => {
+        const host = window.location.host || 'unknown'
+        const mime = 'application/json'
+        const charset = 'utf-8'
+        const data = JSON.stringify(localStorage)
+        const url = `data:${mime};charset=${charset},${encodeURIComponent(data)}`
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `${host}.mchain.backup.json`
+        a.click()
+    }
+
+    const eraseAll = () => {
+        erasePasswordsIv()
+        erasePasswords()
+        setToast({
+            message: 'All data was erased',
+        })
+    }
+
+    const eraseAllConfirm = () => {
+        if (!window.confirm('Erase all data?')) { return false }
+        eraseAll()
+        return true
+    }
+
+    const more = () => {
+        setActionMenu({
+            buttons: [
+                {
+                    text: 'Import',
+                    onClick: importAll,
+                },
+                {
+                    text: 'Export all',
+                    onClick: exportAll,
+                },
+                {
+                    text: 'Erase all',
+                    textColor: 'red',
+                    onClick: eraseAllConfirm,
+                },
+            ],
+        })
     }
 
     return (
@@ -47,7 +95,6 @@ export function RequestKeyPage({ onSubmit }: RequestKeyPageProps) {
                         spellCheck: false,
                         autoFocus: true,
                         required: true,
-                        onKeyDown,
                         onChange,
                     }}
                 />
@@ -61,6 +108,10 @@ export function RequestKeyPage({ onSubmit }: RequestKeyPageProps) {
             </form>
 
             <div className={s.Pad} />
+
+            <div className={s.More} onClick={more}>
+                <Icon id="more" />
+            </div>
         </div>
     )
 }

@@ -14,17 +14,26 @@
     white-space: nowrap;
 }
 
+.RowMasked {
+    text-overflow: initial;
+}
+
 .RowBold {
     font-weight: 500;
 }
 
 .RowClickable {
     cursor: pointer;
-    color: #666;
+    color: #555;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .RowClickable:hover {
     color: #000;
+}
+
+.RowClickable:active {
+    color: #555;
 }
 
 .More {
@@ -36,8 +45,13 @@
     padding: 17px;
     opacity: .4;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .More:hover {
-    opacity: 1;
+    opacity: .8;
+}
+
+.More:active {
+    opacity: .4;
 }
