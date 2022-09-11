@@ -32,7 +32,7 @@ export function RequestKeyPage({ onSubmit }: RequestKeyPageProps) {
             const file = input.files?.[0]
             if (!file) { return }
 
-            if (!window.confirm('This will overwrite all current data.\nContinue?')) { return false }
+            if (!window.confirm('Warning: this will overwrite all current data.\nContinue?')) { return false }
 
             const reader = new FileReader
 
@@ -60,7 +60,7 @@ export function RequestKeyPage({ onSubmit }: RequestKeyPageProps) {
     }
 
     const importText = () => {
-        const text = window.prompt('Paste backup here')
+        const text = window.prompt('Warning: this will overwrite all current data.\nPaste backup contents here:')
 
         try {
             const kv = JSON.parse(String(text || ''))
