@@ -4,14 +4,13 @@ Non-custodial password manager
 
 ## Features
 
-- Stores passwords encrypted, locally in your browser (window.localStorage)
-- Uses AES with initialization vector for better encryption
-- Does not send passwords or encryption key anywhere
+- Stores AES-encrypted passwords locally in your browser (localStorage)
+- Does not send your data anywhere
 - Does not gather any statistics, metrics
-- Open source - MIT License
-- Uses third party libraries as npm deps, check their licenses manually: react, react-router, crypto-js
-- You can export all passwords as encrypted backup and import then to another device
+- Passwords can be exported as encrypted backup and then imported on other devices
 - UI is optimized for phones, tablets and desktops
+- Open source - MIT License (however npm deps with different licenses are required: react, react-router, crypto-js, webpack)
+- Small codebase, easy to audit
 
 ## Live demo
 
@@ -34,11 +33,7 @@ npm start
 npm run build
 ```
 
-## Security risks of passwords leaks
-
-Trojans. They send specific data chunks to 3rd party servers. Like whole localStorage. Like your iOS keychain contents.
-
-- It is a risk to keep your encryption key in a keychain of a Device that could have possibly been infected.
+## The risks of your passwords being leaked
 
 Keyloggers. They send everything you type to 3rd party servers via TCP, UDP, ICMP. They know how to bypass your firewall.
 
@@ -46,7 +41,11 @@ Keyloggers. They send everything you type to 3rd party servers via TCP, UDP, ICM
 - Your browser might have a built-in keylogger
 - Your Device might have a keylogger installed as a service (virtual keyboard, accessibility tools or just an invisible process)
 - Your Device's OS might have a built-in keylogger
-- Third party npm libraries might have a keylogger in js or css (very low chance to find it in the deps list of big trusted libraries, but you never know).
+- Third party npm libraries might have a keylogger in javascript code or in css (very low chance to find it in the deps list of big trusted libraries, but you never know).
+
+Trojans. They send specific data chunks to 3rd party servers. Like whole localStorage. Like your iOS keychain.
+
+- It is a risk to keep your encryption key in a keychain of a Device that could have possibly been infected.
 
 ## TODO
 
