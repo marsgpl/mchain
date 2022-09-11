@@ -34,7 +34,7 @@ npm start
 npm run build
 ```
 
-## Security risks for passwords leaks
+## Security risks of passwords leaks
 
 Trojans. They send specific data chunks to 3rd party servers. Like whole localStorage. Like your iOS keychain contents.
 
