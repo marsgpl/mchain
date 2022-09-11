@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import reportWebVitals from './reportWebVitals'
 import { App } from 'components/App'
 import { ErrorBoundary } from 'components/ErrorBoundary'
 import { HashRouter } from 'react-router-dom'
@@ -25,5 +24,3 @@ document.addEventListener('DOMContentLoaded', () => {
         </React.StrictMode>
     )
 })
-
-reportWebVitals(console.log)
