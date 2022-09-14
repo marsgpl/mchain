@@ -1,4 +1,4 @@
-import { DEFAULT_ERROR_MESSAGE } from 'defs/errors'
+import { DEFAULT_ERROR_MESSAGE } from 'defs/messages'
 import { copy } from 'lib/copy'
 import { useToast } from './useToast'
 
@@ -12,8 +12,11 @@ export function useCopyValue() {
         copy(value).then(() => {
             setToast({ message })
         }).catch(error => {
-            console.error('🔺 error:', error)
-            setToast({ message: DEFAULT_ERROR_MESSAGE })
+            console.error('🔺', error)
+
+            setToast({
+                message: DEFAULT_ERROR_MESSAGE,
+            })
         })
     }
 }

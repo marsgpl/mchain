@@ -5,7 +5,7 @@ import { PasswordsPage } from 'pages/PasswordsPage'
 import { Route, Routes } from 'react-router-dom'
 import { Password, Passwords } from 'model/Password'
 import { ROUTE_NEW_PASSWORD, ROUTE_PASSWORDS, ROUTE_PASSWORD_BY_ID } from 'defs/routes'
-import { loadPasswords, savePasswords, getPasswordsIv, PasswordIV } from 'service/passwords'
+import { loadPasswords, savePasswords, getPasswordsIv, PasswordsIV } from 'service/passwords'
 import { RequestKeyPage } from 'pages/RequestKeyPage'
 import { LoadingPage } from 'pages/LoadingPage'
 import { Toast as ToastModel } from 'model/Toast'
@@ -14,10 +14,11 @@ import { Toast } from 'components/Toast'
 import { SetToastContext } from 'hooks/useToast'
 import { SetActionMenuContext } from 'hooks/useActionMenu'
 import { ActionMenu } from 'components/ActionMenu'
+import { stringifyError } from 'lib/stringifyError'
 
 export function App() {
     const [key, setKey] = React.useState<string>()
-    const [passwordsIv, setPasswordsIv] = React.useState<PasswordIV>()
+    const [passwordsIv, setPasswordsIv] = React.useState<PasswordsIV>()
     const [passwords, setPasswords] = React.useState<Passwords>()
     const [toast, setToast] = React.useState<ToastModel>()
     const [actionMenu, setActionMenu] = React.useState<ActionMenuModel>()
@@ -33,7 +34,7 @@ export function App() {
             setPasswords(passwords)
         } catch (error) {
             throw Error('Decoding failed', {
-                cause: error instanceof Error ? error : Error(String(error)),
+                cause: Error(stringifyError(error)),
             })
         }
     }, [key])

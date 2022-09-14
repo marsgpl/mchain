@@ -1,5 +1,5 @@
 import { Button } from 'components/Button'
-import { DEFAULT_ERROR_MESSAGE } from 'defs/errors'
+import { DEFAULT_ERROR_MESSAGE } from 'defs/messages'
 import { ROUTE_INDEX } from 'defs/routes'
 import { useNavigate } from 'react-router-dom'
 import s from './index.module.css'
