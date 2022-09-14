@@ -12,7 +12,7 @@ import {
 } from 'defs/messages'
 import { useActionMenu } from 'hooks/useActionMenu'
 import { useToast } from 'hooks/useToast'
-import { erasePasswords, erasePasswordsIv } from 'service/passwords'
+import { erasePasswords, erasePasswordsIv, PASSWORDS_STORAGE_KEYS } from 'service/passwords'
 import { exportAsJson, importFromJsonFile, importFromJsonText } from 'service/storage'
 import s from './index.module.css'
 
@@ -40,7 +40,7 @@ export function Tools({
                 throw Error(IMPORT_CANCELLED)
             }
 
-            await importFromJsonFile()
+            await importFromJsonFile(PASSWORDS_STORAGE_KEYS)
 
             setToast({
                 message: IMPORT_OK,
@@ -62,7 +62,7 @@ export function Tools({
                 throw Error(IMPORT_CANCELLED)
             }
 
-            importFromJsonText(text)
+            importFromJsonText(text, PASSWORDS_STORAGE_KEYS)
 
             setToast({
                 message: IMPORT_OK,
@@ -80,7 +80,7 @@ export function Tools({
         const host = window.location.host || 'unknown'
         const file = host + '.mchain.backup.json'
 
-        exportAsJson(file, )
+        exportAsJson(file, PASSWORDS_STORAGE_KEYS)
 
         setToast({
             message: EXPORT_OK,

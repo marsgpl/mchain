@@ -1,8 +1,9 @@
 import { CHARSET_UTF8 } from 'defs/charset'
 import { MIME_JSON } from 'defs/mimes'
+import { pick } from 'lib/pick'
 
-export function exportAsJson(fileName: string) {
-    const data = JSON.stringify(localStorage)
+export function exportAsJson(fileName: string, keys: string[]) {
+    const data = JSON.stringify(pick({...localStorage}, ...keys))
     const url = `data:${MIME_JSON};charset=${CHARSET_UTF8},${encodeURIComponent(data)}`
 
     const a = document.createElement('a')
@@ -13,7 +14,7 @@ export function exportAsJson(fileName: string) {
     a.click()
 }
 
-export function importFromJsonFile(): Promise<true> {
+export function importFromJsonFile(keys: string[]): Promise<true> {
     return new Promise((resolve, reject) => {
         const input = document.createElement('input')
 
@@ -35,7 +36,7 @@ export function importFromJsonFile(): Promise<true> {
 
             reader.onload = () => {
                 try {
-                    importFromJsonText(String(reader.result))
+                    importFromJsonText(String(reader.result), keys)
                     resolve(true)
                 } catch (error) {
                     reject(error)
@@ -49,7 +50,7 @@ export function importFromJsonFile(): Promise<true> {
     })
 }
 
-export function importFromJsonText(text: string) {
+export function importFromJsonText(text: string, keys: string[]) {
     const kv = JSON.parse(text)
 
     if (typeof kv !== 'object') {
@@ -57,6 +58,10 @@ export function importFromJsonText(text: string) {
     }
 
     Object.entries(kv).forEach(([k, v]) => {
+        if (!keys.includes(k)) {
+            throw Error(`Unsupported key: ${k}`)
+        }
+
         localStorage.setItem(k, String(v))
     })
 }
