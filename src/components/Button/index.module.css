@@ -27,7 +27,7 @@
 }
 
 .BgPrimary { background: var(--color-primary); color: #fff; }
-.BgPrimary:hover { background: #38a264; }
+.BgPrimary:hover { background: var(--color-primary-hover); }
 
 .BgWhite { background: #fff; color: #000; }
 .BgWhite:hover { background: #eee; }

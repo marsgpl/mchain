@@ -1,15 +1,15 @@
 # MChain - Memory Chain
 
-Non-custodial password manager
+Non-custodial passwords manager
 
 ## Features
 
-- Stores AES-encrypted passwords locally in your browser (localStorage)
+- Stores all your data AES-encrypted, locally in your browser (localStorage)
 - Does not send your data anywhere
 - Does not gather any statistics, metrics
-- Passwords can be exported as encrypted backup and then imported on other devices
+- All your data can be exported as encrypted backup and then imported on other devices
 - UI is optimized for phones, tablets and desktops
-- Open source - MIT License (however npm deps with different licenses are required: react, react-router, crypto-js, webpack)
+- Open source - MIT License (however npm deps with different licenses are required - see package.json)
 - Small codebase, easy to audit
 
 ## Live demo
@@ -57,3 +57,4 @@ Trojans. They send specific data chunks to 3rd party servers. Like whole localSt
   - settings page
   - way to forget key (logout)
   - export/import/erase options accessible from passwords page
+- merge backups

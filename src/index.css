@@ -34,6 +34,7 @@ body,
 
 :root {
     --color-primary: #41b572;
+    --color-primary-hover: #38a264;
     --page-padding: 30px;
     --content-max-width: 600px;
     --input-height: 52px;

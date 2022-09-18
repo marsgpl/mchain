@@ -1,8 +1,8 @@
 import { ActionMenu as ActionMenuModel } from 'model/ActionMenu'
 import { useActionMenu } from 'hooks/useActionMenu'
-import s from './index.module.css'
 import { Button } from 'components/Button'
 import { cn } from 'lib/cn'
+import s from './index.module.css'
 
 export interface ActionMenuProps {
     data: ActionMenuModel

@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "composite": true,
-    "isolatedModules": true,
-    "tsBuildInfoFile": ".tsbuildinfo",
     "target": "es5",
     "lib": [
       "dom",
@@ -13,11 +9,13 @@
     "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "removeComments": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "rootDir": "src",

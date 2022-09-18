@@ -1,7 +1,7 @@
 {
   "name": "Memory Chain",
   "short_name": "MChain",
-  "description": "Standalone password manager",
+  "description": "Non-custodial passwords manager",
   "background_color": "#f4f4f4",
   "theme_color": "#f4f4f4",
   "display": "standalone",
@@ -17,7 +17,6 @@
     }
   ],
   "categories": [
-    "password manager",
-    "standalone"
+    "passwords manager"
   ]
 }
