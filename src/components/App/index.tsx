@@ -3,9 +3,9 @@ import { Route, Routes } from 'react-router-dom'
 import { NewPasswordPage } from 'pages/NewPasswordPage'
 import { PasswordPage } from 'pages/PasswordPage'
 import { PasswordsPage } from 'pages/PasswordsPage'
-import { Password, Passwords } from 'model/Password'
-import { ROUTE_NEW_PASSWORD, ROUTE_PASSWORDS, ROUTE_PASSWORD_BY_ID } from 'defs/routes'
-import { loadPasswords, savePasswords, getPasswordsIv, PasswordsIV } from 'service/passwords'
+import { Password, Passwords, PasswordsIV } from 'model/Password'
+import { ROUTE_ALL, ROUTE_NEW_PASSWORD, ROUTE_PASSWORDS, ROUTE_PASSWORD_BY_ID } from 'defs/routes'
+import { loadPasswords, savePasswords, getPasswordsIv } from 'service/passwords'
 import { RequestKeyPage } from 'pages/RequestKeyPage'
 import { LoadingPage } from 'pages/LoadingPage'
 import { Toast as ToastModel } from 'model/Toast'
@@ -15,6 +15,7 @@ import { SetToastContext } from 'hooks/useToast'
 import { SetActionMenuContext } from 'hooks/useActionMenu'
 import { ActionMenu } from 'components/ActionMenu'
 import { stringifyError } from 'lib/stringifyError'
+import { ErrorPage } from 'pages/ErrorPage'
 
 export function App() {
     const [key, setKey] = React.useState<string>()
@@ -44,14 +45,14 @@ export function App() {
             return <RequestKeyPage onSubmit={setKey} />
         }
 
-        if (passwords === undefined) {
+        if (passwords === undefined || passwordsIv === undefined) {
             return <LoadingPage />
         }
 
         const createPassword = (password: Password) => {
             const newPasswords = !passwords ? [password] : [...passwords, password]
             setPasswords(newPasswords.sort(({ title: t1 }, { title: t2 }) => t1 === t2 ? 0 : (t1 > t2 ? 1 : -1)))
-            savePasswords(newPasswords, key, passwordsIv!)
+            savePasswords(newPasswords, key, passwordsIv)
         }
 
         const deletePassword = (passwordId: string): boolean => {
@@ -59,7 +60,7 @@ export function App() {
 
             const newPasswords = !passwords ? [] : passwords.filter(p => p.id !== passwordId)
             setPasswords(newPasswords)
-            savePasswords(newPasswords, key, passwordsIv!)
+            savePasswords(newPasswords, key, passwordsIv)
 
             return true
         }
@@ -68,7 +69,7 @@ export function App() {
             const { id } = password
             const newPasswords = !passwords ? [password] : passwords.map(p => p.id === id ? password : p)
             setPasswords(newPasswords)
-            savePasswords(newPasswords, key, passwordsIv!)
+            savePasswords(newPasswords, key, passwordsIv)
         }
 
         return (
@@ -91,6 +92,10 @@ export function App() {
                     passwords={passwords}
                     savePassword={savePassword}
                     deletePassword={deletePassword}
+                />} />
+
+                <Route path={ROUTE_ALL} element={<ErrorPage
+                    message="Unknown url"
                 />} />
             </Routes>
         )

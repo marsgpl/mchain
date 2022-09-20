@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js'
 import { newId } from 'lib/newId'
-import { NewPasswordProps, Password, Passwords } from 'model/Password'
+import { NewPasswordProps, Password, Passwords, PasswordsIV } from 'model/Password'
 import { LOCAL_STORAGE_PASSWORDS_IV, LOCAL_STORAGE_PASSWORDS } from 'defs/localStorage'
 import { AES_IV_BYTES } from 'defs/crypto'
 
@@ -8,8 +8,6 @@ export const PASSWORDS_STORAGE_KEYS = [
     LOCAL_STORAGE_PASSWORDS,
     LOCAL_STORAGE_PASSWORDS_IV,
 ]
-
-export type PasswordsIV = CryptoJS.lib.WordArray
 
 export function newPassword(props?: NewPasswordProps): Password {
     return {

@@ -43,7 +43,8 @@ export function PasswordForm({
         })
     }
 
-    const submit = () => {
+    const submit = (event: React.FormEvent) => {
+        event.preventDefault()
         onSubmit(current)
     }
 
