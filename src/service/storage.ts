@@ -27,7 +27,7 @@ export function importFromJsonFile(keys: string[]): Promise<true> {
                 return reject('File was not selected')
             }
 
-            const reader = new FileReader
+            const reader = new FileReader()
 
             reader.onerror = (event) => {
                 console.error('🔺', event)
