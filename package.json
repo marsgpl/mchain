@@ -3,6 +3,11 @@
   "description": "Non-custodial password manager",
   "version": "0.2.1",
   "license": "MIT",
+  "author": "marsgpl",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marsgpl/mchain.git"
+  },
   "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -19,7 +24,8 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "typescript-plugin-css-modules": "^3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -39,7 +39,6 @@ export function PasswordPage({
 
             <PasswordForm
                 initial={password}
-                className={s.Form}
                 onSubmit={password => {
                     savePassword(password)
                     navigate(ROUTE_PASSWORDS)

@@ -58,3 +58,5 @@ Trojans. They send specific data chunks to 3rd party servers. Like whole localSt
   - way to forget key (logout)
   - export/import/erase options accessible from passwords page
 - merge backups
+- change enc key
+- higher header
