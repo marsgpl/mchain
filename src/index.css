@@ -37,11 +37,11 @@ body,
     --color-primary-hover: #38a264;
     --page-padding: 30px;
     --content-max-width: 600px;
-    --input-height: 52px;
     --header-height: 52px;
-    --toast-height: 52px;
-    --input-font-size: 16px;
+    --input-height: 52px;
     --input-border-radius: 3px;
     --header-z: 1000;
+    --toast-height: 52px;
+    --input-font-size: 16px;
     --action-menu-z: 10000;
 }
